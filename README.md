@@ -5,20 +5,35 @@ An interactive D3.js-powered dashboard to explore stock data of global brands by
 ## 📁 Folder Structure
 
 World-Stock-Prices-Dashboard/
+
 ├── data/
+
 │ └── World-Stock-Prices-Dataset.csv
+
 ├── js/
+
 │ ├── kpis.js
+
 │ ├── filters.js
+
 │ ├── lineChart.js
+
 │ ├── barChart.js
+
 │ ├── pieChart.js
+
 │ ├── volumeChart.js
+
 │ ├── countryDistribution.js
+
 │ ├── candlestickChart.js
+
 │ ├── industryComparisonChart.js
+
 │ └── radarChart.js
+
 ├── style.css
+
 └── index.html
 
 
