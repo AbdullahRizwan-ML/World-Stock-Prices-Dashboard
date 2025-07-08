@@ -5,35 +5,20 @@ An interactive D3.js-powered dashboard to explore stock data of global brands by
 ## 📁 Folder Structure
 
 World-Stock-Prices-Dashboard/
-
 ├── data/
-
 │ └── World-Stock-Prices-Dataset.csv
-
 ├── js/
-
 │ ├── kpis.js
-
 │ ├── filters.js
-
 │ ├── lineChart.js
-
 │ ├── barChart.js
-
 │ ├── pieChart.js
-
 │ ├── volumeChart.js
-
 │ ├── countryDistribution.js
-
 │ ├── candlestickChart.js
-
 │ ├── industryComparisonChart.js
-
 │ └── radarChart.js
-
 ├── style.css
-
 └── index.html
 
 
@@ -44,19 +29,14 @@ World-Stock-Prices-Dashboard/
 2. Ensure the folder structure remains the same.
 
 3. Due to browser restrictions on reading local files, run the dashboard using a local server.
-
    For Python 3.x:
 
-   ```bash
    cd World-Stock-Prices-Dashboard
    python -m http.server 8000
-````
 
 4. Open your browser and visit:
-
-   ```
+   
    http://localhost:8000
-   ```
 
    The dashboard will load with interactive features enabled.
 
