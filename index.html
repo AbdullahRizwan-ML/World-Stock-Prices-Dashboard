@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>World Stock Prices Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>🌍 World Stock Prices Dashboard</h1>
+  </header>
+
+  <section id="filters"></section>
+
+  <section id="kpis" class="kpis-container"></section>
+
+  <section id="charts" class="charts-container">
+    <div id="lineChart" class="chart-box"></div>
+    <div id="barChart" class="chart-box"></div>
+    <div id="pieChart" class="chart-box"></div>
+    <div id="volumeChart" class="chart-box"></div>
+    <div id="countryDistribution" class="chart-box"></div>
+    <div id="candlestickChart" class="chart-box"></div>
+    <div id="industryComparisonChart" class="chart-box"></div>
+  </section>
+
+  <script type="module">
+    import { renderKPIs } from './js/kpis.js';
+    import { renderFilters } from './js/filters.js';
+    import { drawLineChart } from './js/lineChart.js';
+    import { drawBarChart } from './js/barChart.js';
+    import { drawPieChart } from './js/pieChart.js';
+    import { drawVolumeChart } from './js/volumeChart.js';
+    import { drawCountryDistribution } from './js/countryDistribution.js';
+    import { drawCandlestickChart } from './js/candlestickChart.js';
+    import { drawIndustryComparisonChart } from './js/industryComparisonChart.js';
+
+    let originalData;
+
+    d3.csv('./data/World-Stock-Prices-Dataset.csv').then(data => {
+      originalData = data;
+      renderFilters(data);
+      renderKPIs(data);
+      drawLineChart(data);
+      drawBarChart(data);
+      drawPieChart(data);
+      drawVolumeChart(data);
+      drawCountryDistribution(data);
+
+      // Set initial visibility
+      document.getElementById("lineChart").style.display = "block";
+      document.getElementById("barChart").style.display = "block";
+      document.getElementById("pieChart").style.display = "block";
+      document.getElementById("volumeChart").style.display = "block";
+      document.getElementById("countryDistribution").style.display = "block";
+      document.getElementById("candlestickChart").style.display = "none";
+      document.getElementById("industryComparisonChart").style.display = "none";
+    }).catch(error => {
+      console.error("Error loading CSV:", error);
+    });
+
+    // Listen for brand change and update all components
+    window.addEventListener("brandChanged", e => {
+      const brand = e.detail;
+      const isAll = brand === "All";
+      const filtered = isAll ? originalData : originalData.filter(d => d.Brand_Name === brand);
+
+      // Render core charts
+      renderKPIs(filtered);
+      drawLineChart(filtered);
+      drawPieChart(originalData, isAll ? [] : [...new Set(filtered.map(d => d.Industry_Tag))]);
+
+      // Set chart visibility
+      document.getElementById("lineChart").style.display = "block";
+      document.getElementById("barChart").style.display = isAll ? "block" : "none";
+      document.getElementById("pieChart").style.display = "block";
+      document.getElementById("volumeChart").style.display = isAll ? "block" : "none";
+      document.getElementById("countryDistribution").style.display = isAll ? "block" : "none";
+      document.getElementById("candlestickChart").style.display = isAll ? "none" : "block";
+      document.getElementById("industryComparisonChart").style.display = isAll ? "none" : "block";
+
+      // Render charts based on selection
+      if (isAll) {
+        drawBarChart(filtered);
+        drawVolumeChart(filtered);
+        drawCountryDistribution(filtered);
+      } else {
+        drawIndustryComparisonChart(originalData, brand);
+        drawCandlestickChart(filtered, brand);
+      }
+    });
+  </script>
+</body>
+</html>

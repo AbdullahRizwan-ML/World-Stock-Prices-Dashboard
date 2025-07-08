@@ -1,0 +1,159 @@
+/* Global dark mode base */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: #121212;
+  color: #e0e0e0;
+  overflow-x: hidden;
+}
+
+/* Header styling */
+header {
+  background: #1f1f1f;
+  color: #00bcd4;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 188, 212, 0.2);
+  font-size: 1.5em;
+  letter-spacing: 0.5px;
+}
+
+/* Filters section */
+#filters {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+  flex-wrap: wrap;
+}
+
+#filters select {
+  padding: 6px 10px;
+  border: none;
+  background-color: #263238;
+  color: #e0e0e0;
+  border-radius: 5px;
+  font-size: 0.95em;
+}
+
+/* KPIs Section */
+.kpis-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 12px;
+  flex-wrap: wrap;
+}
+
+.kpi-box {
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 10px;
+  width: 20%;
+  min-width: 180px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 188, 212, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kpi-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 188, 212, 0.3);
+}
+
+.kpi-box h3 {
+  color: #00bcd4;
+  margin-bottom: 8px;
+}
+
+/* Chart layout */
+.charts-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 12px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+
+/* Chart containers */
+.chart-box {
+  background: #1e1e1e;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  transition: box-shadow 0.3s ease;
+  box-sizing: border-box;
+  overflow: visible; /* allow content like title to be seen outside bounds */
+  padding-bottom: 10px;
+  display: block; /* reduce if too large */
+}
+
+.chart-box:hover {
+  box-shadow: 0 6px 12px rgba(0, 188, 212, 0.3);
+}
+
+
+.wide-chart {
+  grid-column: span 2;
+}
+
+
+/* SVG elements */
+svg {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12px;
+  color: #e0e0e0;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Axis lines and labels */
+.axis path,
+.axis line {
+  stroke: #aaa;
+}
+
+/* Tooltip style */
+.tooltip {
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 0.85em;
+}
+
+/* Chart titles */
+.chart-box text {
+  fill: #e0e0e0;
+}
+
+/* Dropdown appearance */
+select, option {
+  background-color: #263238;
+  color: #e0e0e0;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 800px) {
+  .charts-container {
+    grid-template-columns: 1fr;
+  }
+  .kpis-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .kpi-box {
+    width: 80%;
+    margin-bottom: 16px;
+  }
+}
+
+/* Ensure SVG scales with container */
+#treemapChart svg {
+  width: 100% !important;
+  height: auto !important;
+}
